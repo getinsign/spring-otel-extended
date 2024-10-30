@@ -14,7 +14,9 @@ jobs:
     permissions:
       contents: read
       packages: write
-
+    defaults:
+      run:
+        working-directory: otel-javaagent-spring-extension
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 11
@@ -26,7 +28,7 @@ jobs:
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
     - name: Build with Maven
-      run: mvn -B package --file otel-javaagent-spring-extension/pom.xml
+      run: mvn -B package --file pom.xml
 
     - name: Publish to GitHub Packages Apache Maven
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
